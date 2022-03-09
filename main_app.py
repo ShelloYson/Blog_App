@@ -1,6 +1,5 @@
 # This is a blog app that allows users to register and post blogs
 from datetime import datetime
-from email.policy import default
 from flask import Flask, render_template, url_for, flash, redirect
 from flask_sqlalchemy import SQLAlchemy
 from forms import RegistrationForm, LoginForm
