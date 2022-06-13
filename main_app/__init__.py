@@ -13,11 +13,11 @@ bcrypt = Bcrypt(app)
 login_manager = LoginManager(app)
 login_manager.login_view = 'login'
 login_manager.login_message_category = 'info'
-app.config['MAIL_SERVER'] = 'smtp.gmail.com'
+app.config['MAIL_SERVER'] = 'mail.gmail.com'
 app.config['MAIL_PORT'] = 587
-app.config['MAIL_USE_TLS'] = True
-app.config['MAIL_USERNAME'] = 'shelloyson444@gmail.com'
-app.config['MAIL_PASSWORD'] = 'Shelloganda2004'
+app.config['MAIL_USE_TLS'] = False
+app.config['MAIL_USERNAME'] = 'reset@gmail.com'
+app.config['MAIL_PASSWORD'] = 'Password1'
 mail = Mail(app)
 
 from main_app import routes

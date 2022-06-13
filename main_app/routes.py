@@ -5,7 +5,7 @@ from flask import render_template, url_for, flash, redirect, request, abort
 from main_app import app, db, bcrypt, mail
 from main_app.forms import (RegistrationForm, LoginForm, 
                             UpdateAccountForm, PostForm, 
-                            RequestPasswordForm, RequestResetForm)
+                            RequestResetForm, ResetPasswordForm)
 from main_app.models import User, Post
 from flask_login import login_user, current_user, logout_user, login_required
 from flask_mail import Message
@@ -146,10 +146,11 @@ def delete_post(post_id):
 
 def send_reset_email(user):
     token = user.get_reset_token()
-    msg = Message('Password Reset Request', sender='noreply@yson.co.nz', recipients=[user.email])
-    msg.body = f'''to reset your password, visit the follwing link:
-    {url_for('reset_token', token=token, _external=True)}
-    If you did not make this request then ignore this email and no changes will be made.'''
+    msg = Message('Password Reset Request', sender='shelloyson444@gmail.com', recipients=[user.email])
+    msg.body = f'''To reset your password, visit the follwing link:
+{url_for('reset_token', token=token, _external=True)}
+If you did not make this request then ignore this email and no changes will be made.
+'''
     mail.send(msg)
 
 # Route for reset request
@@ -170,7 +171,7 @@ def reset_request():
 def reset_token(token):
     if current_user.is_authenticated:
         return redirect(url_for('home'))
-    user = User.varify_reset_token(token)
+    user = User.verify_reset_token(token)
     if user is None:
         flash('That is an invalid or expired token', 'warning')
         return redirect(url_for('reset_request'))
